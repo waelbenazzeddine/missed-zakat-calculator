@@ -15,7 +15,7 @@ Telechargez `index.html` et ouvrez-le dans votre navigateur -- aucune installati
 - Sauvegarde et reprise des saisies (export/import JSON)
 - Graphiques interactifs (patrimoine vs Nisab, Zakat cumulee)
 - Mode clair / Mode sombre
-- 100% cote client -- aucune donnee ne quitte votre navigateur
+- 100% cote utilisateur : aucune donnee ne quitte votre navigateur
 
 ## Base juridique
 
@@ -26,7 +26,7 @@ Telechargez `index.html` et ouvrez-le dans votre navigateur -- aucune installati
 
 ## Avertissement
 
-Ce calculateur fournit une **estimation majorante**. Il ne remplace pas l'avis d'un savant. En cas de doute, consultez un savant de confiance.
+Ce calculateur fournit une **estimation majorante** de la zakat à verser.
 
 ## Sources des donnees
 
