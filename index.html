@@ -5249,15 +5249,77 @@ function getWealthAtDate(dateStr, sortedPoints, intervals) {
   return { netMax, netMin };
 }
 
+// Determine when the hawl (zakat year cycle) begins.
+// Case 1: first data point >= Nisab -> hawl starts at puberty (majorisant)
+// Case 2: first point < Nisab, a later point >= Nisab -> hawl starts day after last point below Nisab
+// Case 3: no point >= Nisab -> no hawl, no zakat
+function determineHawlStart(config, sortedPoints) {
+  if (sortedPoints.length === 0) return null;
+
+  const pubertyGreg = config.puberty_date_gregorian;
+  let firstNisabIdx = null;
+  let lastBelowNisabIdx = null;
+
+  for (let i = 0; i < sortedPoints.length; i++) {
+    const p = sortedPoints[i];
+    const dateStr = p.date_gregorian;
+    const goldVal = (p.assets_max.gold_grams || 0) * getGoldEurPerGram(dateStr);
+    const totalMax = (p.assets_max.liquidity || 0) + goldVal
+                   + (p.assets_max.investments || 0) + (p.assets_max.other || 0);
+    const netMax = Math.max(0, totalMax - (p.debts_min || 0));
+    const nisab = getNisab(dateStr);
+
+    if (netMax >= nisab) {
+      firstNisabIdx = i;
+      break;
+    } else {
+      lastBelowNisabIdx = i;
+    }
+  }
+
+  // Case 3: no point ever reaches Nisab
+  if (firstNisabIdx === null) return null;
+
+  // Case 1: first point already >= Nisab -> hawl starts at puberty
+  if (firstNisabIdx === 0) {
+    return { gregorian: pubertyGreg, case: 1 };
+  }
+
+  // Case 2: hawl starts day after last point below Nisab
+  const belowDate = new Date(sortedPoints[lastBelowNisabIdx].date_gregorian + 'T00:00:00');
+  belowDate.setDate(belowDate.getDate() + 1);
+  const hawlGreg = belowDate.getFullYear() + '-'
+    + String(belowDate.getMonth() + 1).padStart(2, '0') + '-'
+    + String(belowDate.getDate()).padStart(2, '0');
+  return { gregorian: hawlGreg, case: 2 };
+}
+
 function calculateMissedZakat(config, dataPoints, intervals) {
   const results = [];
   let pts = dataPoints.map(p => ({...p, assets_max:{...p.assets_max}, assets_min:{...p.assets_min}}));
   let ivs = intervals.map(iv => ({...iv}));
   const sorted = [...pts].sort((a,b) => a.date_gregorian.localeCompare(b.date_gregorian));
 
-  // Step A: Virtual puberty point
   const pubertyDateGreg = config.puberty_date_gregorian;
-  if (sorted.length > 0 && sorted[0].date_gregorian > pubertyDateGreg) {
+  const paid = config.total_zakat_already_paid;
+
+  // Step A: Determine hawl start
+  const hawlStart = determineHawlStart(config, sorted);
+
+  // Case 3: no point reaches Nisab -> no zakat
+  if (!hawlStart) {
+    return {
+      yearByYear: [],
+      totalZakatEstimated: 0,
+      alreadyPaid: paid,
+      remainingToPay: 0,
+      overPaid: paid > 0,
+      overPaidAmount: paid,
+    };
+  }
+
+  // Case 1 only: insert virtual puberty point if first point is after puberty
+  if (hawlStart.case === 1 && sorted.length > 0 && sorted[0].date_gregorian > pubertyDateGreg) {
     const first = sorted[0];
     const virtualPoint = {
       id: "dp_virtual_puberty",
@@ -5271,11 +5333,11 @@ function calculateMissedZakat(config, dataPoints, intervals) {
     ivs.unshift({ from_id: "dp_virtual_puberty", to_id: first.id, mode: "unknown" });
   }
 
-  // Step B: Generate anniversary dates
-  const pubertyHijri = dateStrToHijri(pubertyDateGreg);
+  // Step B: Generate anniversary dates from hawl start
+  const hawlHijri = dateStrToHijri(hawlStart.gregorian);
   const todayStr = new Date().toISOString().slice(0,10);
   const anniversaries = [];
-  let currentH = addHijriMonths(pubertyHijri.hy, pubertyHijri.hm, pubertyHijri.hd, 12);
+  let currentH = addHijriMonths(hawlHijri.hy, hawlHijri.hm, hawlHijri.hd, 12);
 
   while (true) {
     const gregStr = hijriToDateStr(currentH.hy, currentH.hm, currentH.hd);
@@ -5318,7 +5380,6 @@ function calculateMissedZakat(config, dataPoints, intervals) {
   }
 
   const totalDue = zakatCumuleeMax;
-  const paid = config.total_zakat_already_paid;
   const remaining = Math.max(0, totalDue - paid);
 
   return {
