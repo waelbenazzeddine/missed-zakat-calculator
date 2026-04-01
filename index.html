@@ -5382,6 +5382,17 @@ function calculateMissedZakat(config, dataPoints, intervals) {
   const totalDue = zakatCumuleeMax;
   const remaining = Math.max(0, totalDue - paid);
 
+  // Annee zakatienne en cours
+  const nextAnnivGreg = hijriToDateStr(currentH.hy, currentH.hm, currentH.hd);
+  const nextAnnivHijri = formatHijri(currentH.hy, currentH.hm, currentH.hd);
+  const [nay, nam, nad] = nextAnnivGreg.split('-').map(Number);
+  const nextAnnivFrench = new Date(nay, nam-1, nad).toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
+  const { netMax: todayWealth } = getWealthAtDate(todayStr, sorted, ivs);
+  const todayNisab = getNisab(todayStr);
+  const adjustedTodayMax = Math.max(0, todayWealth - zakatCumuleeMin);
+  const currentYearAboveNisab = adjustedTodayMax >= todayNisab;
+  const currentYearZakat = currentYearAboveNisab ? adjustedTodayMax * 0.025 : 0;
+
   return {
     yearByYear: results,
     totalZakatEstimated: totalDue,
@@ -5389,6 +5400,11 @@ function calculateMissedZakat(config, dataPoints, intervals) {
     remainingToPay: remaining,
     overPaid: paid > totalDue,
     overPaidAmount: paid > totalDue ? paid - totalDue : 0,
+    nextAnniversaryGreg: nextAnnivGreg,
+    nextAnniversaryHijri: nextAnnivHijri,
+    nextAnniversaryFrench: nextAnnivFrench,
+    currentYearZakat: currentYearZakat,
+    currentYearAboveNisab: currentYearAboveNisab,
   };
 }
 
@@ -5922,6 +5938,18 @@ function renderResults(r) {
         </div>
       </div>`;
     }
+  }
+
+  // Annee zakatienne en cours
+  if (r.nextAnniversaryGreg) {
+    const currentZakatText = r.currentYearAboveNisab
+      ? fmtEur(r.currentYearZakat)
+      : '0 EUR <span style="font-size:0.85rem;font-weight:400">(patrimoine actuellement sous le Nisab)</span>';
+    html += `<div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid var(--primary-light);border-radius:var(--radius);padding:20px;margin:20px 0;">
+      <h3 style="margin:0 0 12px;color:var(--primary-dark)">Zakat al-Maal de l'annee en cours</h3>
+      <p style="margin:0 0 8px;">Votre Zakat al-Maal sur l'annee en cours est actuellement d'environ <strong>${currentZakatText}</strong>.</p>
+      <p style="margin:0;color:var(--text-muted);font-size:0.9rem;">Vous avez jusqu'au <strong style="color:var(--text)">${r.nextAnniversaryFrench}</strong> (${r.nextAnniversaryHijri}) pour vous acquitter de cette Zakat.</p>
+    </div>`;
   }
 
   // Year-by-year table
