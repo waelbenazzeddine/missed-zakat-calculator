@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculateur de Zakat al-Maal Manquee</title>
+<title>Calculateur de Zakat al-Maal Manquée</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -173,7 +173,7 @@ input.input-error{border-color:var(--danger)}
 <!-- ========== STEP 0: WELCOME ========== -->
 <section id="step-0" class="step active">
 <div class="card">
-  <h1>Calculateur de Zakat al-Maal Manquee</h1>
+  <h1>Calculateur de Zakat al-Maal Manquée</h1>
   <p style="text-align:center;color:var(--text-muted);margin-bottom:20px">Estimez la Zakat que vous devez rattraper</p>
 
   <div class="islamic-quote">
@@ -184,16 +184,15 @@ input.input-error{border-color:var(--danger)}
 
   <div class="disclaimer">
     <strong>Avertissement important</strong><br><br>
-    Ce calculateur fournit une <strong>estimation majorante</strong> de votre Zakat manquee. Il ne remplace pas l'avis d'un savant.
-    Les calculs sont bases sur l'ecole hanafite pour la question du hawl et utilisent un calendrier lunaire algorithmique
-    qui peut differer de l'observation locale du croissant lunaire (precision &plusmn;1-2 jours).<br><br>
-    <strong>Aucune donnee personnelle n'est collectee ni transmise.</strong> Tous les calculs sont effectues localement dans votre navigateur.<br><br>
-    En cas de doute sur un aspect de votre Zakat, consultez un savant de confiance.
+    Ce calculateur fournit une <strong>estimation majorante</strong> de votre Zakat manquée.
+    Les calculs sont basés sur l'école hanafite pour la question du hawl et utilisent un calendrier lunaire algorithmique
+    qui peut différer de l'observation locale du croissant lunaire (précision &plusmn;1-2 jours).<br><br>
+    <strong>Aucune donnée personnelle n'est collectée ni transmise.</strong> Tous les calculs sont effectués localement dans votre navigateur.<br><br>
   </div>
 
   <div class="export-bar" style="justify-content:center;margin-top:20px">
     <label class="btn btn-secondary btn-sm" style="margin:0;cursor:pointer">
-      Reprendre une saisie precedente
+      Reprendre une saisie précédente
       <input type="file" id="import-file" accept=".json" style="display:none" onchange="importSave(this.files[0])">
     </label>
   </div>
@@ -208,33 +207,33 @@ input.input-error{border-color:var(--danger)}
 
   <div class="islamic-quote">
     <div class="arabic">خُذْ مِنْ أَمْوَالِهِمْ صَدَقَةً تُطَهِّرُهُمْ وَتُزَكِّيهِم بِهَا</div>
-    <div class="french">&laquo; Preleve de leurs biens une aumone par laquelle tu les purifies et les benis &raquo;</div>
+    <div class="french">&laquo; Prélève de leurs biens une aumône par laquelle tu les purifies et les bénis &raquo;</div>
     <div class="source">Coran, 9:103</div>
   </div>
 
   <div class="field-group">
-    <label for="puberty-date">Date de puberte (approximative)</label>
-    <input type="text" id="puberty-date" placeholder="Selectionnez une date...">
-    <div class="field-hint">Choisissez la date approximative a laquelle vous avez atteint la puberte. C'est le point de depart du calcul.</div>
+    <label for="puberty-date">Date de puberté (approximative)</label>
+    <input type="text" id="puberty-date" placeholder="Sélectionnez une date...">
+    <div class="field-hint">Choisissez la date approximative à laquelle vous avez atteint la puberté. C'est le point de départ du calcul.</div>
     <div id="puberty-hijri" class="hijri-display" style="display:none"></div>
   </div>
 
   <!-- Bug 1 / Feature 9: Manual gold price for dates beyond embedded data -->
   <div id="gold-manual-section" class="gold-warning" style="display:none">
     <strong>Cours de l'or incomplet</strong><br>
-    Les donnees de cours de l'or embarquees s'arretent au <strong id="gold-last-date-display"></strong>.
-    Pour les dates plus recentes, veuillez saisir le cours actuel de l'or.<br>
+    Les données de cours de l'or embarquées s'arrêtent au <strong id="gold-last-date-display"></strong>.
+    Pour les dates plus récentes, veuillez saisir le cours actuel de l'or.<br>
     <a href="https://www.goldprice.org/fr/gold-price-per-gram" target="_blank" rel="noopener">Verifier le cours actuel sur goldprice.org</a>
     <div class="field-group" style="margin-top:10px">
       <label for="manual-gold-eur-g">Cours de l'or actuel (EUR / gramme)</label>
       <input type="number" id="manual-gold-eur-g" min="0" step="0.01" placeholder="Ex: 85.50">
-      <div class="field-hint">Ce cours sera utilise uniquement pour les dates non couvertes par les donnees embarquees.</div>
+      <div class="field-hint">Ce cours sera utilisé uniquement pour les dates non couvertes par les données embarquées.</div>
     </div>
   </div>
 
   <div class="field-group" style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px">
-    <strong>Nisab :</strong> base sur l'or (87,48 g)
-    <div class="field-hint">Le Nisab est le seuil minimum de richesse a partir duquel la Zakat est obligatoire. Il est calcule dynamiquement selon le cours de l'or a chaque date anniversaire.</div>
+    <strong>Nisab :</strong> basé sur l'or (87,48 g)
+    <div class="field-hint">Le Nisab est le seuil minimum de richesse à partir duquel la Zakat est obligatoire. Il est calculé dynamiquement selon le cours de l'or à chaque date anniversaire.</div>
   </div>
 </div>
 <div class="nav-buttons">
@@ -246,12 +245,12 @@ input.input-error{border-color:var(--danger)}
 <!-- ========== STEP 2: DATA ENTRY ========== -->
 <section id="step-2" class="step">
 <div class="card">
-  <h2>Saisie des donnees patrimoniales</h2>
-  <p style="color:var(--text-muted);margin-bottom:16px">Ajoutez des points de donnees representant votre patrimoine a differentes dates. Plus vous en ajoutez, plus l'estimation sera precise.</p>
+  <h2>Saisie des données patrimoniales</h2>
+  <p style="color:var(--text-muted);margin-bottom:16px">Ajoutez des points de données représentant votre patrimoine à différentes dates. Plus vous en ajoutez, plus l'estimation sera précise.</p>
 
   <div id="data-points-list"></div>
 
-  <button class="btn btn-secondary" onclick="showAddPointForm()" id="btn-add-point" style="width:100%;margin-top:8px">+ Ajouter un point de donnees</button>
+  <button class="btn btn-secondary" onclick="showAddPointForm()" id="btn-add-point" style="width:100%;margin-top:8px">+ Ajouter un point de données</button>
 
   <div class="chart-container" id="wealth-chart-container" style="display:none">
     <canvas id="wealth-chart"></canvas>
@@ -270,7 +269,7 @@ input.input-error{border-color:var(--danger)}
 <section id="step-3" class="step">
 <div class="card">
   <h2>Interpolation entre les dates</h2>
-  <p style="color:var(--text-muted);margin-bottom:16px">Pour chaque periode entre deux points de donnees, indiquez comment votre patrimoine a evolue. En cas de doute, choisissez &laquo; Ne sait pas &raquo; (l'estimation sera majoree).</p>
+  <p style="color:var(--text-muted);margin-bottom:16px">Pour chaque période entre deux points de données, indiquez comment votre patrimoine a évolué. En cas de doute, choisissez &laquo; Ne sait pas &raquo; (l'estimation sera majorée).</p>
   <div id="interpolation-list"></div>
 </div>
 <div class="nav-buttons">
@@ -285,18 +284,18 @@ input.input-error{border-color:var(--danger)}
 <!-- ========== STEP 4: ALREADY PAID ========== -->
 <section id="step-4" class="step">
 <div class="card">
-  <h2>Zakat deja versee</h2>
+  <h2>Zakat déjà versée</h2>
 
   <div class="islamic-quote">
     <div class="arabic">إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ ...</div>
-    <div class="french">&laquo; Les aumones sont destinees aux pauvres, aux necessiteux... &raquo;</div>
+    <div class="french">&laquo; Les aumônes sont destinées aux pauvres, aux nécessiteux... &raquo;</div>
     <div class="source">Coran, 9:60</div>
   </div>
 
   <div class="field-group">
-    <label for="already-paid">Montant total de Zakat deja versee dans votre vie (EUR)</label>
+    <label for="already-paid">Montant total de Zakat déjà versée dans votre vie (EUR)</label>
     <input type="number" id="already-paid" min="0" step="0.01" value="0" placeholder="0">
-    <div class="field-hint">Entrez le montant total cumule de toute la Zakat que vous avez deja payee. Si vous n'avez jamais paye de Zakat, laissez 0.</div>
+    <div class="field-hint">Entrez le montant total cumulé de toute la Zakat que vous avez déjà payée. Si vous n'avez jamais payé de Zakat, laissez 0.</div>
   </div>
 </div>
 <div class="nav-buttons">
@@ -308,7 +307,7 @@ input.input-error{border-color:var(--danger)}
 <!-- ========== STEP 5: RESULTS ========== -->
 <section id="step-5" class="step">
 <div class="card">
-  <h2>Resultat</h2>
+  <h2>Résultat</h2>
 
   <div id="result-content"></div>
 
@@ -345,19 +344,19 @@ input.input-error{border-color:var(--danger)}
   </div>
 
   <div class="donation-section">
-    <p style="font-size:1.1rem;margin-bottom:16px">Vous pouvez verser votre Zakat al-Maal via le Secours Islamique France, un organisme habilite a collecter et distribuer la Zakat.</p>
+    <p style="font-size:1.1rem;margin-bottom:16px">Vous pouvez verser votre Zakat al-Maal via le Secours Islamique France, un organisme habilité à collecter et distribuer la Zakat.</p>
     <a href="https://www.secours-islamique.org/zakat-al-maal" target="_blank" rel="noopener" class="btn btn-gold">Donner ma Zakat</a>
 
     <div class="tax-info">
       <strong>Deductibilite fiscale (France) :</strong><br>
-      &bull; <strong>75%</strong> de reduction d'impot dans la limite de <strong>1 000 EUR</strong> par an<br>
-      &bull; <strong>66%</strong> de reduction d'impot au-dela de 1 000 EUR (dans la limite de 20% du revenu imposable)<br><br>
-      <em>Exemple : un don de 1 500 EUR ne vous coute en realite que 1 500 - 750 - 330 = <strong>420 EUR</strong> apres reduction d'impot.</em>
+      &bull; <strong>75%</strong> de réduction d'impôt dans la limite de <strong>1 000 EUR</strong> par an<br>
+      &bull; <strong>66%</strong> de réduction d'impôt au-delà de 1 000 EUR (dans la limite de 20% du revenu imposable)<br><br>
+      <em>Exemple : un don de 1 500 EUR ne vous coûte en réalité que 1 500 - 750 - 330 = <strong>420 EUR</strong> après réduction d'impôt.</em>
     </div>
   </div>
 </div>
 <div class="nav-buttons">
-  <button class="btn btn-secondary" onclick="showStep(5)">&larr; Retour aux resultats</button>
+  <button class="btn btn-secondary" onclick="showStep(5)">&larr; Retour aux résultats</button>
   <div></div>
 </div>
 </section>
@@ -5466,7 +5465,7 @@ function checkGoldDataCoverage() {
 
 function validateStep1() {
   if (!appState.config.puberty_date_gregorian) {
-    alert("Veuillez selectionner votre date de puberte.");
+    alert("Veuillez sélectionner votre date de puberté.");
     return;
   }
   // Read manual gold price if provided
@@ -5482,25 +5481,25 @@ function validateStep1() {
 
 function getAddPointFormHTML() {
   return `<div class="add-point-form" id="add-point-form-inner">
-    <h3 id="form-title">Nouveau point de donnees</h3>
+    <h3 id="form-title">Nouveau point de données</h3>
     <div class="field-group">
       <label for="dp-date">Date</label>
-      <input type="text" id="dp-date" placeholder="Selectionnez une date...">
+      <input type="text" id="dp-date" placeholder="Sélectionnez une date...">
       <div id="dp-hijri" class="hijri-display" style="display:none"></div>
     </div>
 
     <h3>Valeur maximale de vos avoirs</h3>
-    <div class="field-hint" style="margin-bottom:8px">Si vous connaissez le montant exact, mettez la meme valeur dans max et min.</div>
+    <div class="field-hint" style="margin-bottom:8px">Si vous connaissez le montant exact, mettez la même valeur dans max et min.</div>
     <div class="category-grid">
       <div class="field-group">
-        <label for="dp-liq-max">Liquidites (EUR)</label>
+        <label for="dp-liq-max">Liquidités (EUR)</label>
         <input type="number" id="dp-liq-max" min="0" step="0.01" value="0" placeholder="0">
-        <div class="field-hint">Comptes, epargne, cash...</div>
+        <div class="field-hint">Comptes, épargne, cash...</div>
       </div>
       <div class="field-group">
         <label for="dp-gold-max">Or (grammes)</label>
         <input type="number" id="dp-gold-max" min="0" step="0.01" value="0" placeholder="0">
-        <div class="field-hint">Bijoux, pieces, lingots...</div>
+        <div class="field-hint">Bijoux, pièces, lingots...</div>
         <div id="dp-gold-max-eur" class="field-hint" style="color:var(--secondary)"></div>
       </div>
       <div class="field-group">
@@ -5511,7 +5510,7 @@ function getAddPointFormHTML() {
       <div class="field-group">
         <label for="dp-other-max">Autres (EUR)</label>
         <input type="number" id="dp-other-max" min="0" step="0.01" value="0" placeholder="0">
-        <div class="field-hint">Creances, depots, argent metal...</div>
+        <div class="field-hint">Créances, dépôts, argent métal...</div>
       </div>
     </div>
 
@@ -5521,7 +5520,7 @@ function getAddPointFormHTML() {
     <div id="min-fields" style="display:none">
       <h3>Valeur minimale de vos avoirs</h3>
       <div class="category-grid">
-        <div class="field-group"><label for="dp-liq-min">Liquidites min (EUR)</label><input type="number" id="dp-liq-min" min="0" step="0.01" value="0"></div>
+        <div class="field-group"><label for="dp-liq-min">Liquidités min (EUR)</label><input type="number" id="dp-liq-min" min="0" step="0.01" value="0"></div>
         <div class="field-group"><label for="dp-gold-min">Or min (grammes)</label><input type="number" id="dp-gold-min" min="0" step="0.01" value="0"></div>
         <div class="field-group"><label for="dp-inv-min">Investissements min (EUR)</label><input type="number" id="dp-inv-min" min="0" step="0.01" value="0"></div>
         <div class="field-group"><label for="dp-other-min">Autres min (EUR)</label><input type="number" id="dp-other-min" min="0" step="0.01" value="0"></div>
@@ -5628,9 +5627,9 @@ function validateDataPointForm() {
   const errors = [];
   const dateStr = document.getElementById('dp-date').value;
 
-  if (!dateStr) errors.push("Veuillez selectionner une date.");
+  if (!dateStr) errors.push("Veuillez sélectionner une date.");
   if (appState.config.puberty_date_gregorian && dateStr && dateStr < appState.config.puberty_date_gregorian) {
-    errors.push("La date ne peut pas etre anterieure a la date de puberte.");
+    errors.push("La date ne peut pas être antérieure à la date de puberté.");
   }
 
   const v = id => parseFloat(document.getElementById(id).value) || 0;
@@ -5737,7 +5736,7 @@ function editDataPoint(id) {
   }
 
   // Update form title
-  document.getElementById('form-title').textContent = 'Modifier le point de donnees';
+  document.getElementById('form-title').textContent = 'Modifier le point de données';
 
   initDpDatePicker();
   if (dpDatePicker) dpDatePicker.setDate(p.date_gregorian, true);
@@ -5775,7 +5774,7 @@ function updateDataPointsList() {
   const sorted = [...appState.dataPoints].sort((a,b) => a.date_gregorian.localeCompare(b.date_gregorian));
 
   if (sorted.length === 0) {
-    list.innerHTML = '<div class="empty-state"><p>Aucun point de donnees. Cliquez sur le bouton ci-dessous pour commencer.</p></div>';
+    list.innerHTML = '<div class="empty-state"><p>Aucun point de données. Cliquez sur le bouton ci-dessous pour commencer.</p></div>';
     return;
   }
 
@@ -5823,7 +5822,7 @@ function generateIntervals() {
 
 function validateStep2() {
   if (appState.dataPoints.length === 0) {
-    alert("Veuillez ajouter au moins un point de donnees.");
+    alert("Veuillez ajouter au moins un point de données.");
     return;
   }
   generateInterpolationUI();
@@ -5839,7 +5838,7 @@ function generateInterpolationUI() {
   const container = document.getElementById('interpolation-list');
 
   if (sorted.length < 2) {
-    container.innerHTML = '<p>Un seul point de donnees : pas d\'interpolation necessaire.</p>';
+    container.innerHTML = '<p>Un seul point de données : pas d\'interpolation nécessaire.</p>';
     return;
   }
 
@@ -5857,12 +5856,12 @@ function generateInterpolationUI() {
       <div class="interp-options">
         <label><input type="radio" name="interp-${idx}" value="left" ${iv.mode==='left'?'checked':''} onchange="setInterpolation(${idx},'left')"><span>Valeur de gauche</span></label>
         <label><input type="radio" name="interp-${idx}" value="right" ${iv.mode==='right'?'checked':''} onchange="setInterpolation(${idx},'right')"><span>Valeur de droite</span></label>
-        <label><input type="radio" name="interp-${idx}" value="unknown" ${iv.mode==='unknown'?'checked':''} onchange="setInterpolation(${idx},'unknown')"><span>Ne sait pas (majore)</span></label>
+        <label><input type="radio" name="interp-${idx}" value="unknown" ${iv.mode==='unknown'?'checked':''} onchange="setInterpolation(${idx},'unknown')"><span>Ne sait pas (recommandé)</span></label>
       </div>
       <div class="field-hint" style="margin-top:8px">
-        ${iv.mode === 'left' ? 'Votre patrimoine etait constant a la valeur du premier point pendant cette periode.'
-         : iv.mode === 'right' ? 'Votre patrimoine etait constant a la valeur du second point pendant cette periode.'
-         : 'En cas de doute, la valeur maximale des deux points sera utilisee (estimation majoree).'}
+        ${iv.mode === 'left' ? 'Votre patrimoine était constant à la valeur du premier point pendant cette période.'
+         : iv.mode === 'right' ? 'Votre patrimoine était constant à la valeur du second point pendant cette période.'
+         : 'En cas de doute, la valeur maximale des deux points sera utilisée (estimation majorée).'}
       </div>
     </div>`;
   }).join('');
@@ -5898,7 +5897,7 @@ function renderResults(r) {
 
   if (r.yearByYear.length === 0) {
     container.innerHTML = `<div class="result-box" style="background:var(--overpaid-bg)">
-      <div class="label">Aucune annee lunaire complete depuis la puberte</div>
+      <div class="label">Aucune année lunaire complète depuis la puberté</div>
       <div style="font-size:1.2rem;color:#1565C0">Pas de Zakat a rattraper</div>
     </div>`;
     return;
@@ -5915,26 +5914,26 @@ function renderResults(r) {
     </div>`;
   } else if (r.overPaid) {
     html += `<div class="overpaid-box">
-      <div class="label">Zakat estimee (majoree)</div>
+      <div class="label">Zakat estimée (majorée)</div>
       <div style="font-size:1.3rem;font-weight:600">${fmtEur(r.totalZakatEstimated)}</div>
-      <div class="label" style="margin-top:12px">Zakat deja versee</div>
+      <div class="label" style="margin-top:12px">Zakat déjà versée</div>
       <div style="font-size:1.3rem;font-weight:600">${fmtEur(r.alreadyPaid)}</div>
       <hr style="margin:16px 0;border-color:var(--border)">
-      <div style="font-size:1.1rem;color:#1565C0">Vous avez potentiellement trop paye.</div>
+      <div style="font-size:1.1rem;color:#1565C0">Vous avez potentiellement trop payé.</div>
       <div style="font-size:0.9rem;color:var(--text-muted);margin-top:4px">
-        La Zakat que vous avez sortie est superieure a la Zakat estimee, qui est de ${fmtEur(r.totalZakatEstimated)}.
+        La Zakat que vous avez sortie est supérieure à la Zakat estimée, qui est de ${fmtEur(r.totalZakatEstimated)}.
       </div>
     </div>`;
   } else {
     html += `<div class="result-box">
-      <div class="label">Zakat majoree totale estimee</div>
+      <div class="label">Zakat manquée majorée estimée</div>
       <div class="amount">${fmtEur(r.totalZakatEstimated)}</div>
     </div>`;
     if (r.alreadyPaid > 0) {
       html += `<div class="result-box" style="background:linear-gradient(135deg,#FFF8E1,#FFECB3)">
-        <div class="label">Zakat deja versee : ${fmtEur(r.alreadyPaid)}</div>
+        <div class="label">Zakat déjà versée : ${fmtEur(r.alreadyPaid)}</div>
         <div class="label" style="margin-top:8px;font-size:1.1rem;font-weight:600;color:var(--primary-dark)">
-          Zakat restante a payer : <span style="font-size:1.5rem">${fmtEur(r.remainingToPay)}</span>
+          Zakat restante à payer : <span style="font-size:1.5rem">${fmtEur(r.remainingToPay)}</span>
         </div>
       </div>`;
     }
@@ -5945,19 +5944,19 @@ function renderResults(r) {
     const currentZakatText = r.currentYearAboveNisab
       ? fmtEur(r.currentYearZakat)
       : '0 EUR <span style="font-size:0.85rem;font-weight:400">(patrimoine actuellement sous le Nisab)</span>';
-    html += `<div style="background:linear-gradient(135deg,#E8F5E9,#F1F8E9);border:2px solid var(--primary-light);border-radius:var(--radius);padding:20px;margin:20px 0;">
-      <h3 style="margin:0 0 12px;color:var(--primary-dark)">Zakat al-Maal de l'annee en cours</h3>
-      <p style="margin:0 0 8px;">Votre Zakat al-Maal sur l'annee en cours est actuellement d'environ <strong>${currentZakatText}</strong>.</p>
+    html += `<div style="background:var(--result-bg);border:2px solid var(--primary-light);border-radius:var(--radius);padding:20px;margin:20px 0;">
+      <h3 style="margin:0 0 12px;color:var(--primary-dark)">Zakat al-Maal de l'année en cours</h3>
+      <p style="margin:0 0 8px;">Votre Zakat al-Maal sur l'année en cours est actuellement d'environ <strong>${currentZakatText}</strong>.</p>
       <p style="margin:0;color:var(--text-muted);font-size:0.9rem;">Vous avez jusqu'au <strong style="color:var(--text)">${r.nextAnniversaryFrench}</strong> (${r.nextAnniversaryHijri}) pour vous acquitter de cette Zakat.</p>
     </div>`;
   }
 
   // Year-by-year table
-  html += `<h3 style="margin-top:24px">Detail annee par annee</h3>
+  html += `<h3 style="margin-top:24px">Détail année par année</h3>
   <div class="result-table-wrapper">
   <table class="result-table">
     <thead><tr>
-      <th>Annee Hijri</th>
+      <th>Année Hijri</th>
       <th>Date Greg.</th>
       <th>Patrimoine net</th>
       <th>Nisab</th>
@@ -6015,7 +6014,7 @@ function renderResultChart(yearByYear) {
         },
         {
           type: 'line',
-          label: 'Zakat cumulee (EUR)',
+          label: 'Zakat cumulée (EUR)',
           data: cumulData,
           borderColor: '#D4A843',
           backgroundColor: 'rgba(212,168,67,0.1)',
